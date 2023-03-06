@@ -1,5 +1,16 @@
 {
   "port": "5000",
-  "mongoDbUrl": "mongodb+srv://saj:saj123@cluster0.giqhx.mongodb.net/?retryWrites=true&w=majority",
-  "adminSecretToken":"nestEcomAdmin"
+  "mongoDbUrl": "mongodb+srv://saj:saj123@cluster0.giqhx.mongodb.net/nestCommerce?retryWrites=true&w=majority",
+  "adminSecretToken":"nestEcomAdmin",
+  "jwtSecret":"nestCommerceSecret007",
+  "emailService": {
+    "testDomain": "sandbox083f57b116324245b35e2b2c38d4ea84.mailgun.org",
+    "privateApiKey": "f75239ac3b3b8b64d57e1231621fa24b-15b35dee-95aca262",
+    "publicApiKey": "pubkey-eef4397024fdd83747b4e0090ff9713c",   
+    "emailTemplates": {
+      "forgotPassword": "forgot-password-template",
+      "verifyEmail": "verify-email-template",
+      "orderSuccess": "order-success"
+    }
+  }
 }

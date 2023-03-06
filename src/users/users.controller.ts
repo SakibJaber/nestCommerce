@@ -35,12 +35,22 @@ export class UsersController {
       loginUser.password,
     );
     if (loginRes.success) {
-      response.cookie('nestcommerce', loginRes.result?.token, {
+      response.cookie('nestCommerce', loginRes.result?.token, {
         httpOnly: true,
       });
     }
     delete loginRes.result?.token;
     return loginRes;
+  }
+
+  @Get('/verify-email/:otp/:email')
+  async verifyEmail(@Param('otp') otp: string, @Param('email') email: string) {
+    return await this.usersService.verifyEmail(otp, email);
+  }
+
+  @Get('send-otp-email/:email')
+  async sendOtpEmail(@Param('email') email: string) {
+    return await this.usersService.sendOtpEmail(email);
   }
 
   @Get()
