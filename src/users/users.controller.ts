@@ -9,11 +9,13 @@ import {
   HttpStatus,
   HttpCode,
   Res,
+  Put,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { Response } from 'express';
+import config from 'config';
 
 @Controller('users')
 export class UsersController {
@@ -35,7 +37,7 @@ export class UsersController {
       loginUser.password,
     );
     if (loginRes.success) {
-      response.cookie('nestCommerce', loginRes.result?.token, {
+      response.cookie(config.get('cookeToken'), loginRes.result?.token, {
         httpOnly: true,
       });
     }
@@ -53,15 +55,29 @@ export class UsersController {
     return await this.usersService.sendOtpEmail(email);
   }
 
+  @Put('/logout')
+  async logout(@Res() res: Response) {
+    res.clearCookie(config.get('cookeToken'));
+    return res.status(HttpStatus.OK).json({
+      success: true,
+      message: 'Logout Successsfully',
+    });
+  }
+
+  @Get('/forget-password/:email')
+  async forgetPassword( @Param('email')email  ){
+    return await this.usersService.forgetPassword(email)
+  }
+
   @Get()
   findAll() {
     return this.usersService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.usersService.findOne(+id);
-  }
+  // @Get(':id')
+  // findOne(@Param('id') id: string) {
+  //   return this.usersService.findOne(+id);
+  // }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {

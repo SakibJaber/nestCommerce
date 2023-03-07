@@ -181,13 +181,36 @@ export class UsersService {
     }
   }
 
+  async forgetPassword(email: string) {
+    try {
+      const user = await this.userDB.findOne({
+        email,
+      });
+      if (!user) {
+        throw new Error('User not Found');
+      }
+      const password = Math.random().toString(36).substring
+      return {
+        success: true,
+        message: 'otp send successfully',
+        result: { email: user.email },
+      };
+    } catch (error) {
+      throw error;
+    }
+  }
+
   findAll() {
     return `This action returns all users`;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
-  }
+  // findOne(id: number) {
+  //   try {
+  //     return `This action returns all users`;
+  //   } catch (error) {
+  //     throw new error();
+  //   }
+  // }
 
   update(id: number, updateUserDto: UpdateUserDto) {
     return `This action updates a #${id} user`;

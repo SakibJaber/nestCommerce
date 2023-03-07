@@ -3,6 +3,7 @@
   "mongoDbUrl": "mongodb+srv://saj:saj123@cluster0.giqhx.mongodb.net/nestCommerce?retryWrites=true&w=majority",
   "adminSecretToken":"nestEcomAdmin",
   "jwtSecret":"nestCommerceSecret007",
+  "cookeToken":"nestCommerceTokenCooke007",
   "emailService": {
     "testDomain": "sandbox083f57b116324245b35e2b2c38d4ea84.mailgun.org",
     "privateApiKey": "f75239ac3b3b8b64d57e1231621fa24b-15b35dee-95aca262",
